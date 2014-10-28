@@ -45,7 +45,7 @@ def build_callback_url(request, urlname, message):
     return url
 
 
-def send_sms(request, to_number, body, callback_urlname="sms_status_callback"):
+def send_sms(to_number, body, callback_urlname="sms_status_callback", request=None, media_url=None):
     """
     Create :class:`OutgoingSMS` object and send SMS using Twilio.
     """
@@ -67,7 +67,7 @@ def send_sms(request, to_number, body, callback_urlname="sms_status_callback"):
                  to_number, status_callback, body)
 
     if not getattr(settings, "TWILIO_DRY_MODE", False):
-        sent = client.sms.messages.create(
+        sent = client.messages.create(
             to=to_number,
             from_=from_number,
             body=body,

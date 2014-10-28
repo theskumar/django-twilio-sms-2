@@ -38,8 +38,8 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules"
     ],
     install_requires=[
-        "django",
-        "djangorestframework>=2.3",
-        "twilio>=3.5.1",
+        "django>=1.7",
+        "djangorestframework>=2.4.3",
+        "twilio>=3.6.8",
     ]
 )

@@ -1,7 +1,7 @@
 django-twilio-sms-2
 ===================
 
-Fork of django-twilio-sms by ngima. Maintained by Saurabh Kumar.
+Fork of django-twilio-sms by nigma. Maintained by Saurabh Kumar.
 
 Twilio integration for SMS-based Django apps
 
@@ -42,17 +42,29 @@ Quickstart
 
 6. Configure settings:
 
-   - TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER - copy
+   - `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_PHONE_NUMBER` - copy
      credentials from the Twilio panel.
 
-   - TWILIO_CALLBACK_USE_HTTPS - use https or not for delivery confirmation
+   - `TWILIO_CALLBACK_USE_HTTPS` - use https or not for delivery confirmation
      callback urls.
 
-   - TWILIO_CALLBACK_DOMAIN - optionally set domain name or IP of your site
+   - `TWILIO_CALLBACK_DOMAIN` - optionally set domain name or IP of your site
      (otherwise the server name will be extracted from the request info).
 
-   - TWILIO_DRY_MODE - set if you want to run in test mode.
+   - `TWILIO_DRY_MODE` - set if you want to run in test mode.
 
+Dependencies
+------------
+
+- django>=1.7
+- djangorestframework>=2.4.3
+- twilio>=3.6.8
+
+
+Further Reading
+---------------
+
+- https://www.twilio.com/docs/api/rest/sending-messages
 
 License
 -------
