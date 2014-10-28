@@ -1,22 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from os.path import abspath, dirname, join
+# from os.path import abspath, dirname, join
 from setuptools import setup
 
 version = "0.2a"
 
 setup(
-    name="django-twilio-sms",
+    name="django-twilio-sms-2",
     version=version,
     description="Twilio integration for SMS-based Django apps",
     license="MIT",
 
-    author="Filip Wasilewski",
-    author_email="en@ig.ma",
+    author="Saurabh Kumar",
+    author_email="me@saurabh-kumar.com",
 
-    url="https://github.com/nigma/django-twilio-sms",
-    download_url="https://github.com/nigma/django-twilio-sms/zipball/master",
+    url="https://github.com/theskumar/django-twilio-sms-2",
+    download_url="https://github.com/theskumar/django-twilio-sms-2/zipball/master",
 
     long_description=open("README.rst").read(),
 
