@@ -2,15 +2,15 @@
 
 from __future__ import unicode_literals
 
-from decimal import Decimal
-from time import strptime, strftime
+# Standard Library
 import logging
+from decimal import Decimal
+from time import strftime, strptime
 
-
+# Third Party Stuff
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.encoding import force_text
-
 from twilio.rest import TwilioRestClient
 
 from .models import OutgoingSMS
@@ -29,7 +29,8 @@ def build_callback_url(request, urlname, message):
     callback_domain = getattr(settings, "TWILIO_CALLBACK_DOMAIN", None)
     if callback_domain:
         url = "{}://{}{}".format(
-            "https" if getattr(settings, "TWILIO_CALLBACK_USE_HTTPS", False) else "http",
+            "https" if getattr(
+                settings, "TWILIO_CALLBACK_USE_HTTPS", False) else "http",
             callback_domain,
             location
         )
@@ -48,7 +49,8 @@ def send_sms(request, to_number, body, callback_urlname="sms_status_callback"):
     """
     Create :class:`OutgoingSMS` object and send SMS using Twilio.
     """
-    client = TwilioRestClient(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+    client = TwilioRestClient(
+        settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
     from_number = settings.TWILIO_PHONE_NUMBER
 
     message = OutgoingSMS.objects.create(
@@ -80,7 +82,8 @@ def send_sms(request, to_number, body, callback_urlname="sms_status_callback"):
         if sent.price:
             message.price = Decimal(force_text(sent.price))
             message.price_unit = sent.price_unit
-        rfc2822_time = strptime(sent.date_created, '%a, %d %b %Y %H:%M:%S +0000')
+        rfc2822_time = strptime(
+            sent.date_created, '%a, %d %b %Y %H:%M:%S +0000')
         sent_at = strftime('%Y-%m-%d %H:%M:%S', rfc2822_time)
         message.sent_at = sent_at
         message.save(update_fields=[

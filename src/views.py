@@ -2,12 +2,13 @@
 
 from __future__ import unicode_literals
 
+# Standard Library
 import logging
 
+# Third Party Stuff
 from django.http import HttpResponse
 from django.views.generic import View
 from django.views.generic.detail import SingleObjectMixin
-
 from rest_framework import status
 from twilio import twiml
 
@@ -19,6 +20,7 @@ logger = logging.getLogger("django-twilio-sms.views")
 
 
 class TwilioView(View):
+
     """
     Base view for Twilio callbacks
     """
@@ -50,6 +52,7 @@ class TwilioView(View):
 
 
 class IncomingSMSView(TwilioView):
+
     """
     Base view for handling incoming SMS messages.
 
@@ -78,6 +81,7 @@ class IncomingSMSView(TwilioView):
 
 
 class SMSStatusCallbackView(SingleObjectMixin, TwilioView):
+
     """
     Callback view for tracking status of sent messages.
 
@@ -91,7 +95,8 @@ class SMSStatusCallbackView(SingleObjectMixin, TwilioView):
         return super(SMSStatusCallbackView, self).post(request, *args, **kwargs)
 
     def handle_request(self, data):
-        logger.debug("Callback for sent SMS message status %s: %r", self.object.pk, data)
+        logger.debug(
+            "Callback for sent SMS message status %s: %r", self.object.pk, data)
 
         serializer = SMSStatusSerializer(instance=self.object, data=data)
         if serializer.is_valid():

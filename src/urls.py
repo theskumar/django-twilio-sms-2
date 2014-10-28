@@ -6,6 +6,6 @@ from django.conf.urls import patterns, url
 
 from .views import sms_status_callback_view
 
-urlpatterns = patterns("",
+urlpatterns = patterns("",  # noqa
     url(r"^callback/sent/(?P<pk>\d+)/$", sms_status_callback_view, name="sms_status_callback"),
 )

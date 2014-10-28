@@ -5,15 +5,20 @@
 
 from __future__ import unicode_literals
 
-from functools import wraps
+# Standard Library
 import logging
+from functools import wraps
 
+# Third Party Stuff
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseNotAllowed
+from django.http import (
+    HttpResponse,
+    HttpResponseForbidden,
+    HttpResponseNotAllowed
+)
 from django.utils import six
 from django.utils.encoding import force_text
 from django.views.decorators.csrf import csrf_exempt
-
 from twilio.twiml import Verb
 from twilio.util import RequestValidator
 
@@ -57,7 +62,8 @@ def twilio_view(f):
 
         # Ensure the request method is POST
         if request.method != "POST":
-            logger.error("Twilio: Expected POST request", extra={"request": request})
+            logger.error(
+                "Twilio: Expected POST request", extra={"request": request})
             return HttpResponseNotAllowed(request.method)
 
         if not getattr(settings, "TWILIO_SKIP_SIGNATURE_VALIDATION"):
@@ -68,13 +74,16 @@ def twilio_view(f):
                 # Ensure the original requested url is tested for validation
                 # Prevents breakage when processed behind a proxy server
                 if "HTTP_X_FORWARDED_SERVER" in request.META:
-                    protocol = "https" if request.META["HTTP_X_TWILIO_SSL"] == "Enabled" else "http"
+                    protocol = "https" if request.META[
+                        "HTTP_X_TWILIO_SSL"] == "Enabled" else "http"
                     url = "{0}://{1}{2}".format(
-                        protocol, request.META["HTTP_X_FORWARDED_SERVER"], request.META["REQUEST_URI"]
+                        protocol, request.META[
+                            "HTTP_X_FORWARDED_SERVER"], request.META["REQUEST_URI"]
                     )
                 signature = request.META["HTTP_X_TWILIO_SIGNATURE"]
             except (AttributeError, KeyError) as e:
-                logger.exception("Twilio: Missing META param", extra={"request": request})
+                logger.exception(
+                    "Twilio: Missing META param", extra={"request": request})
                 return HttpResponseForbidden("Missing META param: %s" % e)
 
             # Now that we have all the required information to perform forgery
