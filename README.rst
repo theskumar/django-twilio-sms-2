@@ -5,25 +5,19 @@ Fork of django-twilio-sms by nigma. Maintained by Saurabh Kumar.
 
 Twilio integration for SMS-based Django apps
 
-.. image:: https://pypip.in/v/django-twilio-sms-2/badge.png
-    :target: https://pypi.python.org/pypi/django-twilio-sms-2/
-    :alt: Latest Version
+.. image:: https://badge.fury.io/py/django-twilio-sms-2.svg?fix
+    :target: http://badge.fury.io/py/django-twilio-sms-2
 
-.. image:: https://pypip.in/d/django-twilio-sms-2/badge.png
-    :target: https://pypi.python.org/pypi/django-twilio-sms-2/
-    :alt: Downloads
-
-.. image:: https://pypip.in/license/django-twilio-sms-2/badge.png
-    :target: https://pypi.python.org/pypi/django-twilio-sms-2/
-    :alt: License
+.. image:: https://travis-ci.org/theskumar/django-twilio-sms-2.svg?branch=master
+        :target: https://travis-ci.org/theskumar/django-twilio-sms-2
 
 
 Quickstart
 ----------
 
-1. Include ``https://github.com/theskumar/django-twilio-sms/archive/master.zip`` in your ``requirements.txt`` file.
+1. Include ``django-twilio-sms-2`` in your ``requirements.txt`` file.
 
-2. Add ``django_twilio_sms`` to ``INSTALLED_APPS`` and syncdb/migrate.
+2. Add ``django_twilio_sms`` to ``INSTALLED_APPS`` and migrate.
 
 3. Add the following url to your urlconf:
 
@@ -42,16 +36,16 @@ Quickstart
 
 6. Configure settings:
 
-   - `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_PHONE_NUMBER` - copy
+   - ``TWILIO_ACCOUNT_SID``, ``TWILIO_AUTH_TOKEN``, ``TWILIO_PHONE_NUMBER`` - copy
      credentials from the Twilio panel.
 
-   - `TWILIO_CALLBACK_USE_HTTPS` - use https or not for delivery confirmation
+   - ``TWILIO_CALLBACK_USE_HTTPS`` - use https or not for delivery confirmation
      callback urls.
 
-   - `TWILIO_CALLBACK_DOMAIN` - optionally set domain name or IP of your site
+   - ``TWILIO_CALLBACK_DOMAIN`` - optionally set domain name or IP of your site
      (otherwise the server name will be extracted from the request info).
 
-   - `TWILIO_DRY_MODE` - set if you want to run in test mode.
+   - ``TWILIO_DRY_MODE`` - set if you want to run in test mode.
 
 Dependencies
 ------------
