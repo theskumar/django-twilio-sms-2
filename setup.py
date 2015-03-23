@@ -4,7 +4,7 @@
 # from os.path import abspath, dirname, join
 from setuptools import setup
 
-version = "1.0.1"
+version = "1.0.2"
 
 setup(
     name="django-twilio-sms-2",
