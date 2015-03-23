@@ -2,6 +2,8 @@
 
 from __future__ import unicode_literals
 
+import datetime
+
 # Standard Library
 import logging
 from decimal import Decimal
@@ -9,6 +11,7 @@ from time import strftime, strptime
 
 # Third Party Stuff
 from django.conf import settings
+from django.utils import six
 from django.core.urlresolvers import reverse
 from django.utils.encoding import force_text
 from twilio.rest import TwilioRestClient
@@ -82,10 +85,15 @@ def send_sms(to_number, body, callback_urlname="sms_status_callback", request=No
         if sent.price:
             message.price = Decimal(force_text(sent.price))
             message.price_unit = sent.price_unit
-        rfc2822_time = strptime(
-            sent.date_created, '%a, %d %b %Y %H:%M:%S +0000')
-        sent_at = strftime('%Y-%m-%d %H:%M:%S', rfc2822_time)
-        message.sent_at = sent_at
+
+        if isinstance(sent.date_created, datetime.datetime):
+            sent_at = sent.date_created
+
+        if isinstance(sent.date_created, six.string_types):
+            rfc2822_time = strptime(sent.date_created, '%a, %d %b %Y %H:%M:%S +0000')
+            sent_at = strftime('%Y-%m-%d %H:%M:%S', rfc2822_time)
+            message.sent_at = sent_at
+
         message.save(update_fields=[
             "sms_sid", "account_sid", "status", "to_parsed",
             "price", "price_unit", "sent_at"
